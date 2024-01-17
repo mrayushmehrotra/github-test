@@ -1,8 +1,6 @@
 var repo_url;
-async function getUserData() {
-  // document.body.setAttribute("transition-style", "in:wipe:right");
-  // document.body.style.backgroundColor = "black";
 
+async function getUserData() {
   const input = document.getElementById("inputUser").value;
 
   try {
@@ -29,6 +27,7 @@ function setUserData(data) {
     const twitter = document.querySelector("#details .twitter");
     const anchor = document.getElementById("anchor");
     const location = document.getElementById("location");
+
     img.setAttribute("src", data.avatar_url);
     name.textContent = data.name;
     bio.textContent = data.bio;
@@ -38,29 +37,39 @@ function setUserData(data) {
     twitter.textContent = `@${data.twitter_username || "N/A"}`;
     twitter.setAttribute("href", `https://x.com/${data.twitter_username}`);
 
+    // Clear previous repo data before fetching new data
+    clearRepoData();
+
+    // Corrected property name from data.repo_url to data.repos_url
+    handleUrlPagination(data.repos_url, 1);
+
     const paginationList = document.getElementById("paginationList");
     for (let i = 1; i <= 10; i++) {
       var listItem = document.createElement("li");
       listItem.textContent = i;
       paginationList.appendChild(listItem);
-      listItem.addEventListener("click", () => {
-        repo_url = data.repos_url;
-        console.log(repo_url, data.repos_url);
-        handleUrlPagination(repo_url, 1);
-      });
+
+      // Use a function to capture the current value of i
+      listItem.addEventListener(
+        "click",
+        ((index) => () => {
+          repo_url = data.repos_url;
+          handleUrlPagination(repo_url, index);
+        })(i)
+      );
     }
   } catch (error) {
     console.error("Error: in setUserData", error);
   }
 }
+
 function handleUrlPagination(url, Index) {
-  console.log(url, "index: ", Index);
   return url + `?per_page=10&page=${Index || 1}`;
 }
 
 async function getRepoData() {
   try {
-    const response = await fetch(handleUrlPagination());
+    const response = await fetch(handleUrlPagination(repo_url));
 
     if (!response.ok) {
       throw new Error(`Failed to fetch repo data: ${response.statusText}`);
