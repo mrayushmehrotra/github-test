@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="style.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/transition-style" />
+  </head>
+  <body style="background-color: black">
+    <div id="search">
+      <div id="paginationDiv">
+        <li id="paginationList"></li>
+      </div>
+      <input id="inputUser" type="text" placeholder="search a user" />
+      <button id="searchUser" onClick="getUserData()" class="btn btn-secondary">
+        Search
+      </button>
+    </div>
+    <div id="main">
+      <section id="bio">
+        <div id="image">
+          <img src="" alt="Search to get a User" id="profileImage" />
+          <div style="display: flex">
+            <svg
+              width="24"
+              height="24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+            >
+              <path
+                d="M14.851 11.923c-.179-.641-.521-1.246-1.025-1.749-1.562-1.562-4.095-1.563-5.657 0l-4.998 4.998c-1.562 1.563-1.563 4.095 0 5.657 1.562 1.563 4.096 1.561 5.656 0l3.842-3.841.333.009c.404 0 .802-.04 1.189-.117l-4.657 4.656c-.975.976-2.255 1.464-3.535 1.464-1.28 0-2.56-.488-3.535-1.464-1.952-1.951-1.952-5.12 0-7.071l4.998-4.998c.975-.976 2.256-1.464 3.536-1.464 1.279 0 2.56.488 3.535 1.464.493.493.861 1.063 1.105 1.672l-.787.784zm-5.703.147c.178.643.521 1.25 1.026 1.756 1.562 1.563 4.096 1.561 5.656 0l4.999-4.998c1.563-1.562 1.563-4.095 0-5.657-1.562-1.562-4.095-1.563-5.657 0l-3.841 3.841-.333-.009c-.404 0-.802.04-1.189.117l4.656-4.656c.975-.976 2.256-1.464 3.536-1.464 1.279 0 2.56.488 3.535 1.464 1.951 1.951 1.951 5.119 0 7.071l-4.999 4.998c-.975.976-2.255 1.464-3.535 1.464-1.28 0-2.56-.488-3.535-1.464-.494-.495-.863-1.067-1.107-1.678l.788-.785z"
+              />
+            </svg>
+            <a target="_blank" id="anchor" href="#body"></a>
+          </div>
+        </div>
+        <div id="details">
+          <h1></h1>
+          <p></p>
+          <div style="display: flex">
+            <svg
+              fill="#000000"
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="20px"
+              height="20px"
+              viewBox="0 0 395.71 395.71"
+              xml:space="preserve"
+            >
+              <g>
+                <path
+                  d="M197.849,0C122.131,0,60.531,61.609,60.531,137.329c0,72.887,124.591,243.177,129.896,250.388l4.951,6.738
+  c0.579,0.792,1.501,1.255,2.471,1.255c0.985,0,1.901-0.463,2.486-1.255l4.948-6.738c5.308-7.211,129.896-177.501,129.896-250.388
+  C335.179,61.609,273.569,0,197.849,0z M197.849,88.138c27.13,0,49.191,22.062,49.191,49.191c0,27.115-22.062,49.191-49.191,49.191
+  c-27.114,0-49.191-22.076-49.191-49.191C148.658,110.2,170.734,88.138,197.849,88.138z"
+                />
+              </g>
+            </svg>
+
+            <h6 id="location"></h6>
+          </div>
+          <a target="_blank" href="#body" class="twitter"></a>
+        </div>
+      </section>
+      <br />
+      <br />
+      <section id="allrepo"></section>
+    </div>
+    <footer></footer>
+  </body>
+
+  <script src="script.js"></script>
+</html>
