@@ -21,7 +21,7 @@ function setUserData(data) {
   try {
     const animation = document.body.setAttribute(
       "transition-style",
-      "in:custom:circle-swoop"
+      "in:wipe:right"
     );
     document.body.style.backgroundColor = "black";
     const img = document.getElementById("profileImage");
