@@ -45,6 +45,8 @@ body {
 }
 #image img {
   border-radius: 50%;
+  height: 10rem;
+  width: 10rem;
 }
 #image {
   display: flex;
@@ -83,7 +85,7 @@ a {
   position: relative;
   padding: 10px;
   border: 1px solid white;
-  height: 12vh;
+  height: 10vh;
   width: 50vh;
   overflow: hidden;
 }
