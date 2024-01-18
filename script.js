@@ -1,5 +1,3 @@
-var repo_url;
-
 async function getUserData() {
   const input = document.getElementById("inputUser").value;
 
@@ -30,18 +28,12 @@ function setUserData(data) {
 
     img.setAttribute("src", data.avatar_url);
     name.textContent = data.name;
-    bio.textContent = data.bio;
-    location.textContent = data.location;
+    bio.textContent = data.bio || "N/A";
+    location.textContent = data.location || "N/A";
     anchor.setAttribute("href", data.html_url);
     anchor.textContent = "View Profile";
     twitter.textContent = `@${data.twitter_username || "N/A"}`;
     twitter.setAttribute("href", `https://x.com/${data.twitter_username}`);
-
-    // Clear previous repo data before fetching new data
-    clearRepoData();
-
-    // Corrected property name from data.repo_url to data.repos_url
-    handleUrlPagination(data.repos_url, 1);
 
     const paginationList = document.getElementById("paginationList");
     for (let i = 1; i <= 10; i++) {
@@ -49,27 +41,23 @@ function setUserData(data) {
       listItem.textContent = i;
       paginationList.appendChild(listItem);
 
-      // Use a function to capture the current value of i
-      listItem.addEventListener(
-        "click",
-        ((index) => () => {
-          repo_url = data.repos_url;
-          handleUrlPagination(repo_url, index);
-        })(i)
-      );
+      listItem.addEventListener("click", () => {
+        clearRepoData();
+        getRepoData(
+          `https://api.github.com/users/${data.login}/repos?page=${i}&per_page=10`
+        );
+      });
     }
   } catch (error) {
     console.error("Error: in setUserData", error);
   }
 }
 
-function handleUrlPagination(url, Index) {
-  return url + `?per_page=10&page=${Index || 1}`;
-}
-
-async function getRepoData() {
+async function getRepoData(url) {
   try {
-    const response = await fetch(handleUrlPagination(repo_url));
+    const response = await fetch(url, {
+      method: "GET",
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch repo data: ${response.statusText}`);
@@ -77,8 +65,8 @@ async function getRepoData() {
 
     const allRepoData = await response.json();
 
-    setRepoData(allRepoData);
     console.log(allRepoData);
+    setRepoData(allRepoData);
   } catch (error) {
     console.error("Error in getRepoData", error);
   }
@@ -92,14 +80,12 @@ function setRepoData(data) {
       const mainElement = document.createElement("main");
 
       mainElement.innerHTML = `
-      <main
-      id="repo"
-      >  
-      <h4>${repo.name}</h4>
-        <p>${repo.description || "No Description available"}</p>
-        <h6
-        id="langs"
-        >${repo.language ? ` ${repo.language}` : "No language available"}</h6>
+        <main id="repo">  
+          <h4>${repo.name}</h4>
+          <p>${repo.description || "No Description available"}</p>
+          <h6 id="langs">${
+            repo.language ? ` ${repo.language}` : "No language available"
+          }</h6>
         </main>
       `;
       allRepoSection.appendChild(mainElement);
