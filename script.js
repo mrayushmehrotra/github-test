@@ -19,11 +19,14 @@ async function getUserData() {
 
 function setUserData(data) {
   try {
+    const mainDiv = document.getElementById("main");
+    mainDiv.style.opacity = 1;
+    clearRepoData();
+
     const animation = document.body.setAttribute(
       "transition-style",
       "in:wipe:right"
     );
-    document.body.style.backgroundColor = "black";
     const img = document.getElementById("profileImage");
     const name = document.querySelector("#details h1");
     const bio = document.querySelector("#details p");
@@ -55,6 +58,11 @@ function setUserData(data) {
             `https://api.github.com/users/${data.login}/repos?page=${i}&per_page=10`
           );
         });
+
+        // Trigger click for the first li
+        if (i === 1) {
+          listItem.click();
+        }
       }
     }
   } catch (error) {
@@ -100,7 +108,9 @@ function setRepoData(data) {
         mainElement.innerHTML = `
           <main id="repo">  
             <h4>${repo.name}</h4>
+            <div>
             <p>${repo.description || "No Description available"}</p>
+            </div>
             <h6 id="langs">${
               repo.language ? ` ${repo.language}` : "No language available"
             }</h6>

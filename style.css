@@ -16,6 +16,7 @@ h4 {
 
 body {
   color: white !important;
+  background-color: black !important;
 }
 
 input,
@@ -42,6 +43,7 @@ body {
   padding: 1rem;
   position: relative;
   overflow: hidden;
+  opacity: 0;
 }
 #image img {
   border-radius: 50%;
@@ -77,15 +79,20 @@ a {
 
 #langs {
   height: 2rem;
-  width: 4rem;
+  width: 3rem;
   color: white;
   display: flex;
 }
 #repo {
   position: relative;
-  padding: 10px;
   border: 1px solid white;
   height: 10vh;
   width: 50vh;
   overflow: hidden;
+  flex-wrap: wrap;
+}
+
+#repo div {
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
